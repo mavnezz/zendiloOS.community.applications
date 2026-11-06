@@ -1,0 +1,18 @@
+id: unsafe
+name: Unsafe
+version: "1.0"
+tagline: Tries everything the policy forbids
+description: An app as it often looks before it is adapted for zendiloOS.
+categories: [development]
+developer: Nobody
+website: https://example.org
+source: https://example.org/source
+license: MIT
+maintainers: [mavnezz]
+architectures: [amd64]
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 8080

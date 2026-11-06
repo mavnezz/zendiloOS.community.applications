@@ -1,0 +1,54 @@
+id: pihole
+name: Pi-hole
+tagline: Block ads and trackers network-wide with your own DNS server
+description: |
+  Pi-hole is a DNS server that blocks ads, trackers and malicious domains
+  for the whole network. Once the router or the devices use it as their DNS
+  server, requests for domains on its block lists are not resolved, without
+  any software on the devices themselves. The web interface shows which
+  devices asked for which domains and how many requests were blocked, and
+  manages block lists, allow lists, groups of clients and local DNS records.
+categories: [network, security]
+developer: Pi-hole contributors
+website: https://pi-hole.net
+source: https://github.com/pi-hole/pi-hole
+license: EUPL-1.2
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Sign in to the web interface with the password you enter here. zendiloOS
+  sets it, so it cannot be changed in Pi-hole itself. Afterwards, enter the
+  NAS's address as the DNS server in your router. Pi-hole's DHCP server is
+  not available: it would need the host network and additional privileges.
+web:
+  port: web
+  path: /admin
+ports:
+  - id: web
+    label: Web interface
+    default: 8800
+  - id: dns
+    label: DNS (TCP and UDP)
+    default: 53
+settings:
+  - id: WEB_PASSWORD
+    label: Web interface password
+    type: password
+    required: true
+translations:
+  de:
+    tagline: Werbung und Tracker netzweit mit eigenem DNS-Server blockieren
+    description: |
+      Pi-hole ist ein DNS-Server, der Werbung, Tracker und schädliche Domains
+      für das ganze Netzwerk blockiert. Sobald der Router oder die Geräte ihn
+      als DNS-Server verwenden, werden Domains aus seinen Sperrlisten nicht
+      mehr aufgelöst, ohne Software auf den Geräten selbst. Die Weboberfläche
+      zeigt, welches Gerät welche Domains angefragt hat und wie viele Anfragen
+      blockiert wurden, und verwaltet Sperr- und Erlaubnislisten, Gruppen von
+      Geräten und lokale DNS-Einträge.
+    notes: |
+      Melde dich an der Weboberfläche mit dem Passwort an, das du hier
+      eingibst. zendiloOS setzt es, deshalb lässt es sich in Pi-hole selbst
+      nicht ändern. Trage danach die Adresse des NAS im Router als DNS-Server
+      ein. Der DHCP-Server von Pi-hole steht nicht zur Verfügung: Er bräuchte
+      das Netzwerk des Hosts und zusätzliche Rechte.

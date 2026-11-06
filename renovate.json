@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "packageRules": [
+    {
+      "description": "One pull request per app; images follow moving tags and are not pinned",
+      "matchManagers": ["docker-compose"],
+      "pinDigests": false,
+      "additionalBranchPrefix": "{{parentDir}}-",
+      "commitMessageSuffix": "in {{parentDir}}",
+      "labels": ["app-update"]
+    }
+  ]
+}

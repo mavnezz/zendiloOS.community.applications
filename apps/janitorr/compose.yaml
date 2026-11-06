@@ -1,0 +1,14 @@
+services:
+  janitorr:
+    image: ghcr.io/schaka/janitorr:jvm-stable
+    restart: unless-stopped
+    user: "${PUID}:${PGID}"
+    mem_limit: 256m
+    environment:
+      TZ: ${TZ}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ${APP_DATA}/config:/config
+      - ${APP_DATA}/logs:/logs
+      - ${SHARE_DATA}:/data

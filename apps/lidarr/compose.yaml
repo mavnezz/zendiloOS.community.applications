@@ -1,0 +1,13 @@
+services:
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    ports:
+      - ${PORT_WEB}:8686
+    volumes:
+      - ${APP_DATA}/config:/config
+      - ${SHARE_DATA}:/data

@@ -1,0 +1,10 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+    ports:
+      - ${PORT_WEB}:3001
+    volumes:
+      - ${APP_DATA}/data:/app/data

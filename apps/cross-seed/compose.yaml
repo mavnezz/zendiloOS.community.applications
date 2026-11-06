@@ -1,0 +1,15 @@
+services:
+  cross-seed:
+    image: ghcr.io/cross-seed/cross-seed:6
+    restart: unless-stopped
+    user: "${PUID}:${PGID}"
+    command: daemon
+    environment:
+      TZ: ${TZ}
+    ports:
+      - ${PORT_API}:2468
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ${APP_DATA}/config:/config
+      - ${SHARE_DATA}:/data

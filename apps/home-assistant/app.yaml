@@ -1,0 +1,58 @@
+id: home-assistant
+name: Home Assistant
+tagline: Control and automate the devices in your home
+description: |
+  Home Assistant is a home automation platform that runs on your own
+  hardware. Through integrations it connects lights, switches, sensors,
+  thermostats, media players and thousands of other devices and services,
+  and finds many of them on the home network by itself. Dashboards show the
+  state of the home and control it; automations react to the time of day,
+  presence and sensor values. Data stays local, and no cloud account is
+  needed.
+categories: [home-automation]
+developer: Home Assistant contributors
+website: https://www.home-assistant.io
+source: https://github.com/home-assistant/core
+license: Apache-2.0
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Create the first account in the onboarding wizard. The app uses the host
+  network so that it can find devices on the home network; its web interface
+  is always on port 8123. Zigbee and Z-Wave sticks reach the app as
+  /dev/ttyUSB0, /dev/ttyUSB1, /dev/ttyACM0 or /dev/ttyACM1 when they are
+  plugged in before the app starts. Bluetooth is not available, because it
+  would need the system bus of the NAS; ESPHome Bluetooth proxies work
+  instead. The add-on store of Home Assistant OS is not part of this
+  installation.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 8123
+    fixed: true
+permissions:
+  host_network: true
+  devices: [/dev/ttyUSB0, /dev/ttyUSB1, /dev/ttyACM0, /dev/ttyACM1]
+translations:
+  de:
+    tagline: Geräte im Haus steuern und automatisieren
+    description: |
+      Home Assistant ist eine Plattform für die Hausautomation, die auf
+      eigener Hardware läuft. Über Integrationen bindet sie Lampen,
+      Schalter, Sensoren, Thermostate, Mediaplayer und Tausende weitere
+      Geräte und Dienste an und findet viele davon selbst im Heimnetz.
+      Dashboards zeigen den Zustand des Hauses und steuern es;
+      Automatisierungen reagieren auf Tageszeit, Anwesenheit und Messwerte.
+      Die Daten bleiben lokal, ein Cloud-Konto ist nicht nötig.
+    notes: |
+      Lege im Einrichtungsassistenten das erste Konto an. Die App nutzt das
+      Netzwerk des Hosts, damit sie Geräte im Heimnetz findet; ihre
+      Weboberfläche liegt deshalb immer auf Port 8123. Zigbee- und
+      Z-Wave-Sticks erreichen die App als /dev/ttyUSB0, /dev/ttyUSB1,
+      /dev/ttyACM0 oder /dev/ttyACM1, wenn sie vor dem Start der App
+      eingesteckt sind. Bluetooth steht nicht zur Verfügung, weil es den
+      Systembus des NAS bräuchte; ESPHome-Bluetooth-Proxys funktionieren
+      stattdessen. Den Add-on-Store von Home Assistant OS gibt es in dieser
+      Installation nicht.

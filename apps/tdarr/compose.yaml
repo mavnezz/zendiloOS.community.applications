@@ -1,0 +1,30 @@
+services:
+  tdarr:
+    image: ghcr.io/haveagitgat/tdarr:latest
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      UMASK: "002"
+      TZ: ${TZ}
+      serverIP: 0.0.0.0
+      serverPort: 8266
+      webUIPort: 8265
+      internalNode: "true"
+      inContainer: "true"
+      nodeName: InternalNode
+      ffmpegVersion: 7
+      auth: "true"
+      seededApiKey: ${API_KEY}
+      apiKey: ${API_KEY}
+    ports:
+      - ${PORT_WEB}:8265
+      - ${PORT_SERVER}:8266
+    volumes:
+      - ${APP_DATA}/server:/app/server
+      - ${APP_DATA}/configs:/app/configs
+      - ${APP_DATA}/logs:/app/logs
+      - ${APP_DATA}/transcode_cache:/temp
+      - ${SHARE_DATA}:/data
+    devices:
+      - /dev/dri:/dev/dri

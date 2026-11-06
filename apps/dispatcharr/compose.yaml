@@ -1,0 +1,16 @@
+services:
+  dispatcharr:
+    image: ghcr.io/dispatcharr/dispatcharr:latest
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      DISPATCHARR_ENV: aio
+      REDIS_HOST: localhost
+      CELERY_BROKER_URL: redis://localhost:6379/0
+      DISPATCHARR_LOG_LEVEL: info
+    ports:
+      - ${PORT_WEB}:9191
+    volumes:
+      - ${APP_DATA}/data:/data
+    devices:
+      - /dev/dri:/dev/dri

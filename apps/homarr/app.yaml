@@ -1,0 +1,64 @@
+id: homarr
+name: Homarr
+tagline: A start page for the apps and services on your network
+description: |
+  Homarr is a dashboard for the apps you run. Boards are put together in the
+  browser by drag and drop, without configuration files: tiles open your
+  apps and show whether they respond, and widgets show data from more than
+  80 integrations, such as running downloads in qBittorrent, upcoming
+  episodes and films from Sonarr and Radarr, what is playing on Jellyfin or
+  Plex, blocked queries in Pi-hole or AdGuard Home and the state of Home
+  Assistant entities. A search covers the boards and the connected apps.
+  Homarr has its own user accounts and groups with permissions per board,
+  and can sign in through OIDC or LDAP. With access to Docker it lists the
+  containers on the NAS and starts, stops and restarts them.
+categories: [productivity, monitoring]
+developer: Homarr Labs
+website: https://homarr.dev
+source: https://github.com/homarr-labs/homarr
+license: Apache-2.0
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  On the first visit, create the administrator account in the onboarding.
+  Add apps and integrations with the NAS's address and their ports, for
+  example http://192.168.1.10:8096. Homarr gets the Docker socket for its
+  Docker integration: the containers widget and page list every container on
+  the NAS and can start, stop, restart and remove them.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 7575
+settings:
+  - id: SECRET_ENCRYPTION_KEY
+    label: Encryption key
+    type: password
+    generate: true
+    length: 64
+    alphabet: hex
+permissions:
+  docker_socket: true
+translations:
+  de:
+    tagline: Eine Startseite für die Apps und Dienste in deinem Netzwerk
+    description: |
+      Homarr ist ein Dashboard für deine Apps. Boards stellst du im Browser
+      per Drag-and-drop zusammen, ohne Konfigurationsdateien: Kacheln öffnen
+      deine Apps und zeigen, ob sie antworten, und Widgets zeigen Daten aus
+      mehr als 80 Integrationen, etwa laufende Downloads in qBittorrent,
+      kommende Folgen und Filme aus Sonarr und Radarr, was gerade auf
+      Jellyfin oder Plex läuft, blockierte Anfragen in Pi-hole oder AdGuard
+      Home und den Zustand von Home-Assistant-Entitäten. Eine Suche
+      durchsucht die Boards und die verbundenen Apps. Homarr hat eigene
+      Benutzerkonten und Gruppen mit Rechten pro Board und kann sich über
+      OIDC oder LDAP anmelden. Mit Zugriff auf Docker listet es die
+      Container auf dem NAS auf und startet, stoppt und startet sie neu.
+    notes: |
+      Lege beim ersten Aufruf im Einrichtungsassistenten das
+      Administratorkonto an. Apps und Integrationen fügst du mit der Adresse
+      des NAS und ihren Ports hinzu, zum Beispiel http://192.168.1.10:8096.
+      Homarr bekommt den Docker-Socket für seine Docker-Integration: Widget
+      und Seite für Container listen alle Container auf dem NAS auf und
+      können sie starten, stoppen, neu starten und entfernen.

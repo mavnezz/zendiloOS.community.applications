@@ -1,0 +1,69 @@
+id: plex
+name: Plex Media Server
+tagline: Stream your films, series and music to the Plex apps
+description: |
+  Plex Media Server sorts your films, series, music and photos into
+  libraries with posters and descriptions, and streams them to the Plex apps
+  on phones, TVs, game consoles and streaming sticks, and to the browser. It
+  converts video on the fly when a device cannot play the original, and
+  every member of the household can have their own profile and watch
+  history. Plex is closed source and needs a free Plex account; some
+  features, such as hardware transcoding and streaming outside the home in
+  the mobile and TV apps, need a paid subscription.
+categories: [media]
+developer: Plex, Inc.
+website: https://www.plex.tv
+source: https://github.com/linuxserver/docker-plex
+license: LicenseRef-Proprietary
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Get a claim token at https://www.plex.tv/claim right before installing and
+  enter it as "Plex claim token": on its first start the server links itself
+  to your Plex account. The token is valid for four minutes. Then add
+  libraries from the folder /data. So that devices at home connect
+  directly, enter http://<NAS address>:<port> under Settings → Network →
+  Custom server access URLs. Hardware transcoding needs a Plex Pass.
+web:
+  port: web
+  path: /web
+ports:
+  - id: web
+    label: Web interface and apps
+    default: 32400
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-only
+settings:
+  - id: PLEX_CLAIM
+    label: Plex claim token
+    description: From https://www.plex.tv/claim, valid for four minutes. Only used on the first start.
+    type: text
+permissions:
+  devices: [/dev/dri]
+translations:
+  de:
+    tagline: Filme, Serien und Musik an die Plex-Apps streamen
+    description: |
+      Plex Media Server ordnet Filme, Serien, Musik und Fotos in Bibliotheken
+      mit Covern und Beschreibungen und streamt sie an die Plex-Apps auf
+      Handys, Fernsehern, Spielkonsolen und Streaming-Sticks sowie in den
+      Browser. Kann ein Gerät das Original nicht abspielen, wandelt Plex das
+      Video beim Abspielen um. Jedes Mitglied des Haushalts kann ein eigenes
+      Profil mit eigenem Verlauf haben. Plex ist nicht quelloffen und braucht
+      ein kostenloses Plex-Konto; einige Funktionen, etwa
+      Hardware-Transkodierung und das Streamen außer Haus in den Handy- und
+      TV-Apps, brauchen ein kostenpflichtiges Abo.
+    notes: |
+      Hol dir direkt vor der Installation unter https://www.plex.tv/claim
+      einen Claim-Token und trage ihn bei „Plex claim token“ ein: Beim ersten
+      Start verknüpft sich der Server damit mit deinem Plex-Konto. Der Token
+      gilt vier Minuten. Füge dann Bibliotheken aus dem Ordner /data hinzu.
+      Damit Geräte im Heimnetz sich direkt verbinden, trage unter
+      Einstellungen → Netzwerk bei den benutzerdefinierten
+      Server-Zugriffs-URLs http://<NAS-Adresse>:<Port> ein.
+      Hardware-Transkodierung braucht einen Plex Pass.

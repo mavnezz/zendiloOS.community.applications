@@ -1,0 +1,12 @@
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    ports:
+      - ${PORT_WEB}:9696
+    volumes:
+      - ${APP_DATA}/config:/config

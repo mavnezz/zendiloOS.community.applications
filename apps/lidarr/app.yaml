@@ -1,0 +1,46 @@
+id: lidarr
+name: Lidarr
+tagline: Finds, downloads and sorts music automatically
+description: |
+  Lidarr manages your music collection by artist. It watches for new albums
+  of the artists you follow, searches your indexers, hands releases to a
+  download client such as qBittorrent and files finished albums with tags
+  and cover art into your library.
+categories: [downloads]
+developer: Lidarr team
+website: https://lidarr.audio
+source: https://github.com/Lidarr/Lidarr
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Connect qBittorrent and Prowlarr with the NAS's address and their ports,
+  for example http://192.168.1.10:8080. Keep downloads and music in the same
+  share, such as /data/torrents and /data/media/music: then Lidarr
+  hard-links finished downloads instead of copying them.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 8686
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: Musik automatisch finden, herunterladen und einsortieren
+    description: |
+      Lidarr verwaltet deine Musiksammlung nach Künstlern. Es achtet auf
+      neue Alben der Künstler, denen du folgst, sucht sie über deine
+      Indexer, übergibt sie an einen Download-Client wie qBittorrent und
+      legt fertige Alben mit Tags und Covern in deiner Bibliothek ab.
+    notes: |
+      Verbinde qBittorrent und Prowlarr über die Adresse des NAS und ihre
+      Ports, zum Beispiel http://192.168.1.10:8080. Lege Downloads und Musik
+      in dieselbe Freigabe, etwa nach /data/torrents und /data/media/music:
+      Dann verlinkt Lidarr fertige Downloads, statt sie zu kopieren.

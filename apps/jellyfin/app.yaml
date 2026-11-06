@@ -1,0 +1,51 @@
+id: jellyfin
+name: Jellyfin
+tagline: Stream your films, series and music to every device
+description: |
+  Jellyfin is a free media server. It sorts your films, series, music and
+  photos into a library with posters and descriptions, and streams them to
+  browsers, phones, TVs and media players. It converts video on the fly when
+  a device cannot play the original, and gives every member of the household
+  their own account, watch history and parental controls. No subscription,
+  no cloud account.
+categories: [media]
+developer: Jellyfin contributors
+website: https://jellyfin.org
+source: https://github.com/jellyfin/jellyfin
+license: GPL-2.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Create the first account in the setup wizard, then add libraries from the
+  folder /data. With a GPU in the NAS, turn on hardware acceleration under
+  Dashboard → Playback → Transcoding.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 8096
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-only
+permissions:
+  devices: [/dev/dri]
+translations:
+  de:
+    tagline: Filme, Serien und Musik auf jedes Gerät streamen
+    description: |
+      Jellyfin ist ein freier Medienserver. Er ordnet Filme, Serien, Musik
+      und Fotos in eine Bibliothek mit Covern und Beschreibungen und streamt
+      sie in den Browser, aufs Handy, auf Fernseher und Mediaplayer. Kann ein
+      Gerät das Original nicht abspielen, wandelt Jellyfin das Video beim
+      Abspielen um. Jedes Mitglied des Haushalts bekommt ein eigenes Konto mit
+      eigenem Verlauf und Jugendschutz. Ohne Abo, ohne Cloud-Konto.
+    notes: |
+      Lege im Einrichtungsassistenten das erste Konto an und füge dann
+      Bibliotheken aus dem Ordner /data hinzu. Hat das NAS eine GPU, schalte
+      unter Dashboard → Wiedergabe → Transkodierung die Hardwarebeschleunigung
+      ein.

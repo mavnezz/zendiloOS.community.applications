@@ -1,0 +1,62 @@
+id: jellystat
+name: Jellystat
+tagline: Statistics on what is watched on your Jellyfin server
+description: |
+  Jellystat records what is played on a Jellyfin server and turns it into
+  statistics. It follows running sessions live and keeps a watch history per
+  user, film, series and library: what was watched, when, for how long, on
+  which device and client, and whether it was played directly or
+  transcoded. Charts show activity by day, hour and library, the most
+  watched titles and the most active users. Jellystat syncs the libraries
+  on a schedule, can read the data of Jellyfin's Playback Reporting plugin
+  and backs its database up to files you can restore. The developer is
+  rewriting Jellystat from scratch; until then the current version receives
+  fixes for major bugs only.
+categories: [media, monitoring]
+developer: CyferShepard
+website: https://github.com/CyferShepard/Jellystat
+source: https://github.com/CyferShepard/Jellystat
+license: MIT
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  On the first visit, create the Jellystat account, then enter Jellyfin by
+  the NAS's address and its port, for example http://192.168.1.10:8096, and
+  an API key created in Jellyfin's dashboard under API Keys. The first sync
+  of a large library takes a while.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 3002
+settings:
+  - id: DB_PASSWORD
+    label: Database password
+    type: password
+    generate: true
+  - id: JWT_SECRET
+    label: Sign-in token secret
+    type: password
+    generate: true
+translations:
+  de:
+    tagline: Statistiken darüber, was auf deinem Jellyfin-Server geschaut wird
+    description: |
+      Jellystat zeichnet auf, was auf einem Jellyfin-Server abgespielt wird,
+      und macht daraus Statistiken. Es verfolgt laufende Sitzungen live und
+      führt einen Verlauf pro Benutzer, Film, Serie und Bibliothek: was
+      geschaut wurde, wann, wie lange, auf welchem Gerät und Client und ob
+      direkt abgespielt oder transkodiert. Diagramme zeigen die Aktivität nach
+      Tag, Uhrzeit und Bibliothek, die meistgesehenen Titel und die aktivsten
+      Benutzer. Jellystat gleicht die Bibliotheken nach Zeitplan ab, kann die
+      Daten des Jellyfin-Plugins Playback Reporting übernehmen und sichert
+      seine Datenbank in Dateien, aus denen du sie wiederherstellen kannst.
+      Der Entwickler schreibt Jellystat von Grund auf neu; bis dahin bekommt
+      die aktuelle Version nur Korrekturen für größere Fehler.
+    notes: |
+      Lege beim ersten Aufruf das Jellystat-Konto an und gib dann Jellyfin
+      mit der Adresse des NAS und seinem Port an, zum Beispiel
+      http://192.168.1.10:8096, dazu einen API-Schlüssel, den du im
+      Jellyfin-Dashboard unter API-Schlüssel erstellst. Der erste Abgleich
+      einer großen Bibliothek dauert eine Weile.

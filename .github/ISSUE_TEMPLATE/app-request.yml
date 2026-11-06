@@ -1,0 +1,28 @@
+name: App request
+description: Suggest an app for the catalog
+labels: [app-request]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: App
+      description: Name and website
+    validations:
+      required: true
+  - type: input
+    id: image
+    attributes:
+      label: Docker image
+      description: The image the developers publish, such as `ghcr.io/example/app`
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why on a NAS
+      description: What would you use it for?
+  - type: textarea
+    id: needs
+    attributes:
+      label: What it needs
+      description: Devices, the host network, the Docker socket, special capabilities? Apps that need privileged mode cannot be in the catalog.

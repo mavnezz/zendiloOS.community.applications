@@ -1,0 +1,57 @@
+id: wizarr
+name: Wizarr
+tagline: Invite people to your media server with a link
+description: |
+  Wizarr invites people to Jellyfin, Plex, Emby, Audiobookshelf, Navidrome,
+  Komga, Kavita and RomM. You create an invitation and choose which
+  libraries it opens, whether it can be used more than once and when the
+  link and the account expire; the person opens the link, creates an account
+  and is added to the media server. A wizard then shows them which apps to
+  install and how to request films and series in Seerr or Ombi or join a
+  Discord server; its steps can be edited and extended. Wizarr lists the
+  users of the connected servers and disables or deletes accounts when they
+  expire.
+categories: [media]
+developer: Wizarr contributors
+website: https://docs.wizarr.dev
+source: https://github.com/wizarrrr/wizarr
+license: MIT
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  On the first visit, create the administrator account, then add your media
+  server with the NAS's address and its port, for example
+  http://192.168.1.10:8096, and its API key (for Plex, a token). Invitation
+  links point to the address you have Wizarr open at: to invite people
+  outside your home network, open Wizarr through an address they can reach,
+  such as a domain on your reverse proxy, and enter the media server's public
+  address as its external URL.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 5690
+translations:
+  de:
+    tagline: Leute per Link zu deinem Medienserver einladen
+    description: |
+      Wizarr lädt Leute zu Jellyfin, Plex, Emby, Audiobookshelf, Navidrome,
+      Komga, Kavita und RomM ein. Du erstellst eine Einladung und legst fest,
+      welche Bibliotheken sie freigibt, ob sie mehrfach nutzbar ist und wann
+      Link und Konto ablaufen; die eingeladene Person öffnet den Link, legt
+      ein Konto an und wird zum Medienserver hinzugefügt. Ein Assistent zeigt
+      ihr danach, welche Apps sie installieren soll und wie sie in Seerr oder
+      Ombi Filme und Serien wünscht oder einem Discord-Server beitritt; seine
+      Schritte lassen sich bearbeiten und ergänzen. Wizarr listet die
+      Benutzer der verbundenen Server auf und deaktiviert oder löscht Konten,
+      wenn sie ablaufen.
+    notes: |
+      Lege beim ersten Aufruf das Administratorkonto an und füge dann deinen
+      Medienserver mit der Adresse des NAS und seinem Port hinzu, zum
+      Beispiel http://192.168.1.10:8096, dazu seinen API-Schlüssel (bei Plex
+      ein Token). Einladungslinks zeigen auf die Adresse, unter der du Wizarr
+      geöffnet hast: Um Leute außerhalb deines Heimnetzes einzuladen, öffne
+      Wizarr über eine Adresse, die sie erreichen, etwa eine Domain auf
+      deinem Reverse Proxy, und trage die öffentliche Adresse des
+      Medienservers als externe URL ein.

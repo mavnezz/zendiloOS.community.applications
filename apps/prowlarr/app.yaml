@@ -1,0 +1,41 @@
+id: prowlarr
+name: Prowlarr
+tagline: Manages indexers for Radarr, Sonarr and Lidarr in one place
+description: |
+  Prowlarr keeps your torrent trackers and Usenet indexers in one place and
+  hands them to Radarr, Sonarr, Lidarr and Bookshelf, so each indexer is set
+  up once. It shows how each indexer is doing, searches all of them by hand
+  and routes requests through FlareSolverr where a site sits behind
+  Cloudflare.
+categories: [downloads]
+developer: Prowlarr team
+website: https://prowlarr.com
+source: https://github.com/Prowlarr/Prowlarr
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Add Radarr, Sonarr and Lidarr under Settings → Apps with the NAS's
+  address, their ports and API keys. For sites behind Cloudflare, add
+  FlareSolverr under Settings → Indexers as a proxy at http://<NAS
+  address>:8191.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 9696
+translations:
+  de:
+    tagline: Indexer für Radarr, Sonarr und Lidarr an einer Stelle verwalten
+    description: |
+      Prowlarr verwaltet deine Torrent-Tracker und Usenet-Indexer an einer
+      Stelle und gibt sie an Radarr, Sonarr, Lidarr und Bookshelf weiter,
+      sodass jeder Indexer nur einmal eingerichtet wird. Es zeigt, wie es
+      jedem Indexer geht, durchsucht alle von Hand und leitet Anfragen über
+      FlareSolverr, wo eine Seite hinter Cloudflare liegt.
+    notes: |
+      Füge Radarr, Sonarr und Lidarr unter Settings → Apps mit der Adresse
+      des NAS, ihren Ports und API-Schlüsseln hinzu. Für Seiten hinter
+      Cloudflare trägst du FlareSolverr unter Settings → Indexers als Proxy
+      mit http://<Adresse des NAS>:8191 ein.

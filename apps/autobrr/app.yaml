@@ -1,0 +1,37 @@
+id: autobrr
+name: autobrr
+tagline: Grabs torrents the moment they are announced
+description: |
+  autobrr watches the IRC announce channels and RSS feeds of torrent
+  trackers and grabs new releases the moment they appear, according to
+  filters you set: resolution, source, size, release groups and more. It
+  sends them straight to qBittorrent or to Radarr, Sonarr and Lidarr, which
+  is faster than waiting for their next RSS check.
+categories: [downloads]
+developer: autobrr contributors
+website: https://autobrr.com
+source: https://github.com/autobrr/autobrr
+license: GPL-2.0-or-later
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Create the first account when you open the app, then connect qBittorrent
+  and the *arr apps with the NAS's address and their ports.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 7474
+translations:
+  de:
+    tagline: Torrents im Moment ihrer Ankündigung holen
+    description: |
+      autobrr beobachtet die IRC-Ankündigungskanäle und RSS-Feeds von
+      Torrent-Trackern und holt neue Releases, sobald sie erscheinen, nach
+      Filtern, die du festlegst: Auflösung, Quelle, Größe, Release-Gruppen
+      und mehr. Es schickt sie direkt an qBittorrent oder an Radarr, Sonarr
+      und Lidarr, schneller als deren nächste RSS-Abfrage.
+    notes: |
+      Lege beim ersten Aufruf das erste Konto an und verbinde dann
+      qBittorrent und die *arr-Apps über die Adresse des NAS und ihre Ports.

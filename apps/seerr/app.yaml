@@ -1,0 +1,40 @@
+id: seerr
+name: Seerr
+tagline: Lets your household request films and series
+description: |
+  Seerr is a request portal for Jellyfin, Plex and Emby. Members of the
+  household sign in with their media server account, browse what is popular
+  or coming soon and request films and series; Seerr passes approved
+  requests to Radarr and Sonarr and tells people when their request is ready
+  to watch. Seerr continues Overseerr and Jellyseerr.
+categories: [media]
+developer: Seerr team
+website: https://docs.seerr.dev
+source: https://github.com/seerr-team/seerr
+license: MIT
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  In the setup wizard, sign in with your Jellyfin or Plex account and enter
+  the media server by the NAS's address; connect Radarr and Sonarr the same
+  way.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 5055
+translations:
+  de:
+    tagline: Filme und Serien im Haushalt wünschen lassen
+    description: |
+      Seerr ist ein Anfrageportal für Jellyfin, Plex und Emby. Mitglieder
+      des Haushalts melden sich mit ihrem Konto des Medienservers an,
+      stöbern in beliebten und kommenden Titeln und wünschen sich Filme und
+      Serien; genehmigte Anfragen gibt Seerr an Radarr und Sonarr weiter und
+      meldet, wenn etwas bereitsteht. Seerr führt Overseerr und Jellyseerr
+      fort.
+    notes: |
+      Melde dich im Einrichtungsassistenten mit deinem Jellyfin- oder
+      Plex-Konto an und gib den Medienserver mit der Adresse des NAS an; Radarr
+      und Sonarr verbindest du genauso.

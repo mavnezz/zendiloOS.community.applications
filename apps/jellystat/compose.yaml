@@ -1,0 +1,34 @@
+services:
+  jellystat:
+    image: cyfershepard/jellystat:latest
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_IP: database
+      POSTGRES_PORT: 5432
+      JWT_SECRET: ${JWT_SECRET}
+    ports:
+      - ${PORT_WEB}:3000
+    volumes:
+      - ${APP_DATA}/backup:/app/backend/backup-data
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ${APP_DATA}/postgres:/var/lib/postgresql
+    shm_size: 1gb
+    healthcheck:
+      test: pg_isready --dbname=postgres --username=postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5

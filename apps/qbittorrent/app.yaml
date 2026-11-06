@@ -1,0 +1,58 @@
+id: qbittorrent
+name: qBittorrent
+tagline: BitTorrent client with a web interface
+description: |
+  qBittorrent downloads and shares files over BitTorrent. It is operated
+  through a web interface: add torrents by file or magnet link, set
+  categories and tags, limit bandwidth by schedule, choose individual files
+  within a torrent and search across torrent sites with search plugins. It
+  supports DHT, peer exchange, encrypted connections and RSS feeds that
+  download new items automatically.
+categories: [downloads]
+developer: qBittorrent project
+website: https://www.qbittorrent.org
+source: https://github.com/qbittorrent/qBittorrent
+license: GPL-2.0-or-later
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Sign in as `admin` with the temporary password that qBittorrent prints to
+  the app's log when it starts, then set your own password under Tools →
+  Options → WebUI; until then, every start creates a new one. Save downloads
+  below /data, for example in /data/torrents, the share Radarr and Sonarr
+  use as well. Change the ports in zendiloOS, not in qBittorrent's options.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 8080
+  - id: peer
+    label: Peer connections (TCP and UDP)
+    default: 6881
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: BitTorrent-Client mit Weboberfläche
+    description: |
+      qBittorrent lädt Dateien über BitTorrent herunter und teilt sie.
+      Bedient wird es über eine Weboberfläche: Torrents per Datei oder
+      Magnet-Link hinzufügen, Kategorien und Tags vergeben, die Bandbreite
+      nach Zeitplan begrenzen, einzelne Dateien eines Torrents auswählen und
+      mit Such-Plugins auf Torrent-Seiten suchen. Es unterstützt DHT, Peer
+      Exchange, verschlüsselte Verbindungen und RSS-Feeds, die neue Einträge
+      automatisch herunterladen.
+    notes: |
+      Melde dich als `admin` mit dem vorläufigen Passwort an, das
+      qBittorrent beim Start ins Protokoll der App schreibt, und lege dann
+      unter Werkzeuge → Optionen → Webinterface ein eigenes Passwort fest;
+      bis dahin entsteht bei jedem Start ein neues. Speichere Downloads
+      unter /data, zum Beispiel in /data/torrents, der Freigabe, die auch
+      Radarr und Sonarr nutzen. Ändere die Ports in zendiloOS, nicht in den
+      Optionen von qBittorrent.

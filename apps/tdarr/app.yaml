@@ -1,0 +1,74 @@
+id: tdarr
+name: Tdarr
+tagline: Converts and cleans up the video files in your library
+description: |
+  Tdarr works through your film and series library by rules you set for
+  each library: re-encode everything to H.265 (HEVC) to save space, remux
+  into MKV or MP4, drop audio and subtitle tracks you do not need, or check
+  files for damage. The rules are a stack of plugins that workers run on the
+  CPU or the GPU, on a schedule and as new files arrive, and statistics show
+  what the library holds. The server comes with a node that does the work on
+  the NAS; nodes on other computers can share the load. Tdarr is closed
+  source and free for personal use; a subscription adds features.
+categories: [media]
+developer: HaveAGitGat
+website: https://tdarr.io
+source: https://github.com/HaveAGitGat/Tdarr
+license: LicenseRef-Proprietary
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Choose the API key yourself when installing: tapi_ followed by at least
+  9 letters, digits or underscores. Sign in as admin with the key as
+  password; the built-in node and nodes on other computers connect with it.
+  Add libraries from /data and set /temp as their transcode cache. Try a new
+  plugin stack on a few files first: the processed file replaces the
+  original.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 8265
+  - id: server
+    label: Server port for nodes on other computers
+    default: 8266
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+settings:
+  - id: API_KEY
+    label: API key
+    description: >-
+      tapi_ followed by at least 9 letters, digits or underscores. Nodes
+      connect with it, and it is the password of the account admin.
+    type: password
+    required: true
+permissions:
+  devices: [/dev/dri]
+translations:
+  de:
+    tagline: Videodateien der Bibliothek umwandeln und aufräumen
+    description: |
+      Tdarr arbeitet deine Film- und Serienbibliothek nach Regeln ab, die du
+      für jede Bibliothek festlegst: alles nach H.265 (HEVC) umkodieren, um
+      Platz zu sparen, in MKV oder MP4 umverpacken, unnötige Tonspuren und
+      Untertitel entfernen oder Dateien auf Schäden prüfen. Die Regeln sind
+      ein Stapel von Plugins, die Worker auf der CPU oder der GPU ausführen,
+      nach Zeitplan und sobald neue Dateien ankommen; Statistiken zeigen, was
+      in der Bibliothek steckt. Zum Server gehört ein Node, der die Arbeit auf
+      dem NAS erledigt; Nodes auf anderen Rechnern können mithelfen. Tdarr
+      ist nicht quelloffen und für den privaten Gebrauch kostenlos; ein Abo
+      schaltet weitere Funktionen frei.
+    notes: |
+      Den API-Schlüssel legst du bei der Installation selbst fest: tapi_
+      gefolgt von mindestens 9 Buchstaben, Ziffern oder Unterstrichen. Melde
+      dich als admin mit dem Schlüssel als Passwort an; der eingebaute Node
+      und Nodes auf anderen Rechnern verbinden sich damit. Füge Bibliotheken
+      aus /data hinzu und trage /temp als ihren Transcode-Cache ein. Probiere
+      einen neuen Plugin-Stapel zuerst an wenigen Dateien aus: Die
+      bearbeitete Datei ersetzt das Original.

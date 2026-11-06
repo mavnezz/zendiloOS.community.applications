@@ -1,0 +1,48 @@
+id: radarr
+name: Radarr
+tagline: Finds, downloads and sorts films automatically
+description: |
+  Radarr keeps a list of the films you want. It searches your indexers for
+  them, hands releases to a download client such as qBittorrent and moves
+  finished downloads into your film library under clean names. It swaps in
+  better releases as they appear and tells Jellyfin or Plex when something
+  new has arrived.
+categories: [downloads]
+developer: Radarr team
+website: https://radarr.video
+source: https://github.com/Radarr/Radarr
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Connect qBittorrent and Prowlarr with the NAS's address and their ports,
+  for example http://192.168.1.10:8080. Keep downloads and films in the same
+  share, such as /data/torrents and /data/media/movies: then Radarr
+  hard-links finished downloads instead of copying them.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 7878
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: Filme automatisch finden, herunterladen und einsortieren
+    description: |
+      Radarr führt eine Liste der Filme, die du haben möchtest. Es sucht sie
+      über deine Indexer, übergibt Treffer an einen Download-Client wie
+      qBittorrent und verschiebt fertige Downloads mit sauberen Namen in
+      deine Filmbibliothek. Erscheint eine bessere Version, tauscht es sie
+      aus, und Jellyfin oder Plex erfahren, wenn etwas Neues da ist.
+    notes: |
+      Verbinde qBittorrent und Prowlarr über die Adresse des NAS und ihre
+      Ports, zum Beispiel http://192.168.1.10:8080. Lege Downloads und Filme
+      in dieselbe Freigabe, etwa nach /data/torrents und /data/media/movies:
+      Dann verlinkt Radarr fertige Downloads, statt sie zu kopieren.

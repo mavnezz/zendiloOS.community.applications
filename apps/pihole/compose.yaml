@@ -1,0 +1,17 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      PIHOLE_UID: ${PUID}
+      PIHOLE_GID: ${PGID}
+      FTLCONF_webserver_api_password: ${WEB_PASSWORD}
+      FTLCONF_dns_listeningMode: ALL
+      FTLCONF_ntp_sync_active: "false"
+    ports:
+      - ${PORT_WEB}:80
+      - ${PORT_DNS}:53
+      - ${PORT_DNS}:53/udp
+    volumes:
+      - ${APP_DATA}/etc-pihole:/etc/pihole

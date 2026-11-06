@@ -1,0 +1,54 @@
+id: kapowarr
+name: Kapowarr
+tagline: Builds and manages a library of comic books
+description: |
+  Kapowarr does for comics what Sonarr does for series. You add the volumes
+  you want, and it searches GetComics for their issues, trade paperbacks and
+  one-shots, downloads them directly or through services such as Mega and
+  Pixeldrain, or hands them to a torrent client. Finished downloads are
+  renamed by your naming scheme and moved into the volume's folder; archives
+  can be unpacked and converted. Metadata comes from Comic Vine, and an
+  existing collection can be imported.
+categories: [media, downloads]
+developer: Cas van Tijn
+website: https://casvt.github.io/Kapowarr/
+source: https://github.com/Casvt/Kapowarr
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Enter a Comic Vine API key (free at https://comicvine.gamespot.com/api/)
+  under Settings → General and add a root folder below /data, such as
+  /data/media/comics. Kapowarr asks for no password until you set one under
+  Settings → General → Authentication.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 5656
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: Eine Comic-Sammlung aufbauen und verwalten
+    description: |
+      Kapowarr macht für Comics, was Sonarr für Serien macht. Du fügst die
+      gewünschten Bände hinzu, und es sucht auf GetComics nach ihren Heften,
+      Sammelbänden und One-Shots, lädt sie direkt oder über Dienste wie Mega
+      und Pixeldrain herunter oder übergibt sie an einen Torrent-Client.
+      Fertige Downloads werden nach deinem Namensschema umbenannt und in den
+      Ordner des Bands verschoben; Archive lassen sich entpacken und
+      umwandeln. Die Metadaten kommen von Comic Vine, eine vorhandene
+      Sammlung lässt sich importieren.
+    notes: |
+      Trage unter Settings → General einen Comic-Vine-API-Schlüssel ein
+      (kostenlos unter https://comicvine.gamespot.com/api/) und füge einen
+      Root-Ordner unterhalb von /data hinzu, etwa /data/media/comics.
+      Kapowarr fragt nach keinem Passwort, bis du unter Settings → General →
+      Authentication eines festlegst.

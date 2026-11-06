@@ -1,0 +1,67 @@
+id: cross-seed
+name: cross-seed
+tagline: Seeds the torrents you already have on more trackers
+description: |
+  cross-seed finds the torrents you already have on other trackers. It
+  compares the contents of qBittorrent with the search results and RSS
+  feeds of your Torznab indexers, from Prowlarr for example, and adds every
+  match to qBittorrent, linked to the data that is already there: you seed
+  the same files on more trackers without downloading them again. It checks
+  the RSS feeds every 30 minutes and searches your library once a day;
+  through its API, qBittorrent and autobrr can start a search as soon as a
+  download finishes or a release is announced. It is meant mainly for
+  private trackers and has no interface; it is configured through a file.
+categories: [downloads]
+developer: cross-seed contributors
+website: https://www.cross-seed.org
+source: https://github.com/cross-seed/cross-seed
+license: Apache-2.0
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  cross-seed only runs once config.js in the folder config of the app's
+  data is filled in; the file appears at the first start. Enter the
+  Torznab URLs of your indexers under torznab, from Prowlarr for example
+  http://host.docker.internal:9696/1/api?apikey=…, qBittorrent under
+  torrentClients as qbittorrent:http://user:password@host.docker.internal:8080
+  and a folder in the share under linkDirs, such as
+  /data/torrents/cross-seed, then restart the app. For calls from
+  qBittorrent or autobrr to port 2468, also set apiKey (at least 24
+  characters).
+ports:
+  - id: api
+    label: API for qBittorrent and autobrr
+    default: 2468
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: Vorhandene Torrents auf weiteren Trackern seeden
+    description: |
+      cross-seed findet die Torrents, die du schon hast, auf anderen
+      Trackern. Es vergleicht den Inhalt von qBittorrent mit den
+      Suchergebnissen und RSS-Feeds deiner Torznab-Indexer, etwa aus
+      Prowlarr, und fügt jeden Treffer in qBittorrent hinzu, verlinkt mit
+      den vorhandenen Daten: Du seedest dieselben Dateien auf mehr Trackern,
+      ohne sie erneut herunterzuladen. Es prüft die RSS-Feeds alle 30
+      Minuten und durchsucht deine Bibliothek einmal am Tag; über seine API
+      können qBittorrent und autobrr eine Suche starten, sobald ein Download
+      fertig ist oder ein Release angekündigt wird. Es ist vor allem für
+      private Tracker gedacht und hat keine Oberfläche; eingerichtet wird es
+      über eine Datei.
+    notes: |
+      cross-seed läuft erst, wenn config.js im Ordner config der App-Daten
+      ausgefüllt ist; die Datei entsteht beim ersten Start. Trage unter
+      torznab die Torznab-URLs deiner Indexer ein, aus Prowlarr etwa
+      http://host.docker.internal:9696/1/api?apikey=…, unter torrentClients
+      qBittorrent als
+      qbittorrent:http://benutzer:passwort@host.docker.internal:8080 und
+      unter linkDirs einen Ordner in der Freigabe wie
+      /data/torrents/cross-seed, und starte die App dann neu. Für Aufrufe
+      von qBittorrent oder autobrr an Port 2468 setze außerdem apiKey
+      (mindestens 24 Zeichen).

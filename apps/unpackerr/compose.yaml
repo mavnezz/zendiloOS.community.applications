@@ -1,0 +1,14 @@
+services:
+  unpackerr:
+    image: golift/unpackerr:latest
+    restart: unless-stopped
+    user: "${PUID}:${PGID}"
+    environment:
+      TZ: ${TZ}
+    ports:
+      - ${PORT_WEB}:5656
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ${APP_DATA}/config:/config
+      - ${SHARE_DATA}:/data

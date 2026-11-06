@@ -1,0 +1,40 @@
+id: dispatcharr
+name: Dispatcharr
+tagline: Manages IPTV channels, programme guides and streams
+description: |
+  Dispatcharr collects channels from IPTV playlists, matches them with
+  programme guides (EPG) and logos and offers them as a tuner that Jellyfin,
+  Plex and other players can use. It groups and renames channels, switches
+  to a backup stream when one fails and can buffer and re-stream through
+  FFmpeg, with the GPU if the NAS has one.
+categories: [media]
+developer: Dispatcharr contributors
+website: https://dispatcharr.tv
+source: https://github.com/Dispatcharr/Dispatcharr
+license: AGPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Create the administrator account when you open the app. Players reach the
+  tuner at the NAS's address on the same port.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface and tuner
+    default: 9191
+permissions:
+  devices: [/dev/dri]
+translations:
+  de:
+    tagline: IPTV-Sender, Programmführer und Streams verwalten
+    description: |
+      Dispatcharr sammelt Sender aus IPTV-Playlists, ordnet ihnen
+      Programmführer (EPG) und Logos zu und stellt sie als Tuner bereit, den
+      Jellyfin, Plex und andere Player nutzen können. Es gruppiert und
+      benennt Sender um, wechselt bei Ausfällen auf einen Ersatz-Stream und
+      kann über FFmpeg puffern und weiterstreamen, mit der GPU, wenn das NAS
+      eine hat.
+    notes: |
+      Lege beim ersten Aufruf das Administratorkonto an. Player erreichen
+      den Tuner über die Adresse des NAS auf demselben Port.

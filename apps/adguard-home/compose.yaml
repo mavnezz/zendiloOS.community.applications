@@ -1,0 +1,14 @@
+services:
+  adguard-home:
+    image: adguard/adguardhome:latest
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      ADGUARD_HOME_DEFAULT_WEB_PORT: "3000"
+    ports:
+      - ${PORT_WEB}:3000
+      - ${PORT_DNS}:53
+      - ${PORT_DNS}:53/udp
+    volumes:
+      - ${APP_DATA}/work:/opt/adguardhome/work
+      - ${APP_DATA}/conf:/opt/adguardhome/conf

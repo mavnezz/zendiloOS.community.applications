@@ -1,0 +1,75 @@
+id: decluttarr
+name: Decluttarr
+tagline: Clears stalled and failed downloads out of Radarr and Sonarr
+description: |
+  Decluttarr keeps the download queues of Radarr and Sonarr clean. Every
+  ten minutes it removes downloads that failed, stalled, stay too slow,
+  hang while fetching metadata, are missing files or belong to films and
+  series deleted in the meantime, as well as releases Radarr or Sonarr
+  refuse to import because they are no upgrade. Most of them go on the
+  blocklist, and Radarr and Sonarr search for a replacement right away.
+  With access to qBittorrent it measures speeds there directly and leaves
+  torrents tagged `Keep` alone. It has no interface of its own.
+categories: [downloads]
+developer: ManiMatter
+website: https://github.com/ManiMatter/decluttarr
+source: https://github.com/ManiMatter/decluttarr
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Radarr and Sonarr must use English as their interface language
+  (Settings → UI): Decluttarr reads their status messages. The download
+  client must be named qBittorrent in Radarr and Sonarr, or Decluttarr
+  does not find its torrents in qBittorrent.
+settings:
+  - id: RADARR_URL
+    label: Radarr address
+    type: text
+    required: true
+    default: http://host.docker.internal:7878
+  - id: RADARR_API_KEY
+    label: Radarr API key
+    description: In Radarr under Settings → General.
+    type: password
+    required: true
+  - id: SONARR_URL
+    label: Sonarr address
+    type: text
+    required: true
+    default: http://host.docker.internal:8989
+  - id: SONARR_API_KEY
+    label: Sonarr API key
+    description: In Sonarr under Settings → General.
+    type: password
+    required: true
+  - id: QBITTORRENT_URL
+    label: qBittorrent address
+    type: text
+    required: true
+    default: http://host.docker.internal:8080
+  - id: QBITTORRENT_API_KEY
+    label: qBittorrent API key
+    description: >-
+      In qBittorrent under Tools → Options → WebUI → API Key. Without it,
+      Decluttarr works from the queues of Radarr and Sonarr alone.
+    type: password
+translations:
+  de:
+    tagline: Hängende und fehlgeschlagene Downloads aus Radarr und Sonarr räumen
+    description: |
+      Decluttarr hält die Download-Warteschlangen von Radarr und Sonarr
+      sauber. Alle zehn Minuten entfernt es Downloads, die fehlgeschlagen
+      sind, stocken, dauerhaft zu langsam sind, beim Laden der Metadaten
+      hängen, denen Dateien fehlen oder die zu inzwischen gelöschten Filmen
+      und Serien gehören, dazu Releases, die Radarr oder Sonarr nicht
+      importieren, weil sie keine Verbesserung sind. Die meisten landen auf
+      der Sperrliste, und Radarr und Sonarr suchen sofort nach Ersatz. Mit
+      Zugriff auf qBittorrent misst es die Geschwindigkeit direkt dort und
+      lässt Torrents mit dem Tag `Keep` in Ruhe. Eine eigene Oberfläche hat
+      es nicht.
+    notes: |
+      Radarr und Sonarr müssen Englisch als Sprache der Oberfläche nutzen
+      (Settings → UI), denn Decluttarr liest ihre Statusmeldungen. Der
+      Download-Client muss in Radarr und Sonarr qBittorrent heißen, sonst
+      findet Decluttarr seine Torrents in qBittorrent nicht.

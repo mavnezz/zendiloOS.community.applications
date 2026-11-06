@@ -1,0 +1,48 @@
+id: bookshelf
+name: Bookshelf
+tagline: Finds, downloads and sorts e-books and audiobooks
+description: |
+  Bookshelf continues Readarr, whose development has ended. It keeps a list
+  of the authors and books you want, searches your indexers for e-books and
+  audiobooks, hands releases to a download client such as qBittorrent and
+  files them into your library with metadata from Goodreads.
+categories: [downloads]
+developer: Bookshelf contributors
+website: https://github.com/pennydreadful/bookshelf
+source: https://github.com/pennydreadful/bookshelf
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Connect qBittorrent and Prowlarr with the NAS's address and their ports,
+  for example http://192.168.1.10:8080. Keep downloads and books in the same
+  share, such as /data/torrents and /data/media/books: then Bookshelf
+  hard-links finished downloads instead of copying them.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 8787
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: E-Books und Hörbücher automatisch finden und einsortieren
+    description: |
+      Bookshelf führt Readarr fort, dessen Entwicklung eingestellt ist. Es
+      führt eine Liste der Autoren und Bücher, die du haben möchtest, sucht
+      E-Books und Hörbücher über deine Indexer, übergibt sie an einen
+      Download-Client wie qBittorrent und legt sie mit Metadaten von
+      Goodreads in deiner Bibliothek ab.
+    notes: |
+      Verbinde qBittorrent und Prowlarr über die Adresse des NAS und ihre
+      Ports, zum Beispiel http://192.168.1.10:8080. Lege Downloads und
+      Bücher in dieselbe Freigabe, etwa nach /data/torrents und
+      /data/media/books: Dann verlinkt Bookshelf fertige Downloads, statt
+      sie zu kopieren.

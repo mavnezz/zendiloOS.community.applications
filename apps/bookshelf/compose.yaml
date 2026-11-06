@@ -1,0 +1,13 @@
+services:
+  bookshelf:
+    image: ghcr.io/pennydreadful/bookshelf:softcover
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    ports:
+      - ${PORT_WEB}:8787
+    volumes:
+      - ${APP_DATA}/config:/config
+      - ${SHARE_DATA}:/data

@@ -1,0 +1,56 @@
+id: immich
+name: Immich
+tagline: Back up and browse the photos and videos from your phones
+description: |
+  Immich backs up the photos and videos from your phones to the NAS. The
+  mobile apps upload new pictures in the background; the web interface and
+  the apps show them on a timeline, on a map and in albums. Immich
+  recognises faces, finds pictures by what they show ("dog on the beach"),
+  reads their metadata and lets you share albums with other accounts or by
+  link. Every member of the household gets their own account and storage.
+  Face recognition and search run on the NAS itself.
+categories: [photos, backup]
+developer: Immich contributors
+website: https://immich.app
+source: https://github.com/immich-app/immich
+license: AGPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Open the web interface and create the first account; it becomes the
+  administrator. Immich keeps its own folder structure in the photos share
+  (library, upload, thumbs and others): add and delete pictures through
+  Immich, not by changing the files in the share.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 2283
+shares:
+  - id: photos
+    label: Photos
+    description: The share where Immich stores uploaded photos and videos, thumbnails and converted videos.
+    access: read-write
+settings:
+  - id: DB_PASSWORD
+    label: Database password
+    type: password
+    generate: true
+translations:
+  de:
+    tagline: Fotos und Videos vom Handy sichern und ansehen
+    description: |
+      Immich sichert die Fotos und Videos vom Handy auf dem NAS. Die
+      Apps laden neue Bilder im Hintergrund hoch; Weboberfläche und Apps
+      zeigen sie auf einer Zeitleiste, auf einer Karte und in Alben. Immich
+      erkennt Gesichter, findet Bilder nach ihrem Inhalt („Hund am Strand“),
+      liest ihre Metadaten und teilt Alben mit anderen Konten oder per Link.
+      Jedes Mitglied des Haushalts bekommt ein eigenes Konto mit eigenem
+      Speicher. Gesichtserkennung und Suche laufen auf dem NAS selbst.
+    notes: |
+      Öffne die Weboberfläche und lege das erste Konto an; es wird
+      Administrator. Immich legt in der Foto-Freigabe eine eigene
+      Ordnerstruktur an (library, upload, thumbs und weitere): Füge Bilder
+      über Immich hinzu und lösche sie dort, nicht durch Ändern der Dateien in
+      der Freigabe.

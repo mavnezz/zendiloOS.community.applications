@@ -1,0 +1,12 @@
+services:
+  wizarr:
+    image: ghcr.io/wizarrrr/wizarr:latest
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    ports:
+      - ${PORT_WEB}:5690
+    volumes:
+      - ${APP_DATA}/data:/data

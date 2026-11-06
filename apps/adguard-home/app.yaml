@@ -1,0 +1,52 @@
+id: adguard-home
+name: AdGuard Home
+tagline: Block ads and trackers for every device on your network
+description: |
+  AdGuard Home is a DNS server that filters ads, trackers and malicious
+  domains for the whole network. Once the router or the devices use it as
+  their DNS server, blocked domains are no longer resolved, without any
+  software on the devices themselves. It keeps a query log and statistics,
+  supports filter lists, custom rules, per-client settings and parental
+  controls, and can forward queries to upstream servers over encrypted DNS
+  (DNS-over-HTTPS, DNS-over-TLS, DNS-over-QUIC).
+categories: [network, security]
+developer: AdGuard
+website: https://adguard.com/adguard-home/overview.html
+source: https://github.com/AdguardTeam/AdGuardHome
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  The setup wizard opens in the web interface. Keep the admin web interface
+  on port 3000 there (the wizard proposes it): zendiloOS forwards only this
+  port, so with any other port the interface is no longer reachable. Leave
+  the DNS server on port 53. Afterwards, enter the NAS's address as the DNS
+  server in your router. The DHCP server of AdGuard Home is not available.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 3000
+  - id: dns
+    label: DNS (TCP and UDP)
+    default: 53
+translations:
+  de:
+    tagline: Werbung und Tracker für alle Geräte im Netzwerk blockieren
+    description: |
+      AdGuard Home ist ein DNS-Server, der Werbung, Tracker und schädliche
+      Domains für das ganze Netzwerk filtert. Sobald der Router oder die
+      Geräte ihn als DNS-Server verwenden, werden gesperrte Domains nicht mehr
+      aufgelöst, ohne Software auf den Geräten selbst. Er führt ein
+      Anfrageprotokoll und Statistiken, unterstützt Filterlisten, eigene
+      Regeln, Einstellungen pro Gerät und Jugendschutz und kann Anfragen über
+      verschlüsseltes DNS (DNS-over-HTTPS, DNS-over-TLS, DNS-over-QUIC) an
+      vorgelagerte Server weiterleiten.
+    notes: |
+      Der Einrichtungsassistent öffnet sich in der Weboberfläche. Belasse die
+      Admin-Weboberfläche dort auf Port 3000 (der Assistent schlägt ihn vor):
+      zendiloOS leitet nur diesen Port weiter, mit einem anderen Port ist die
+      Oberfläche nicht mehr erreichbar. Belasse den DNS-Server auf Port 53.
+      Trage danach die Adresse des NAS im Router als DNS-Server ein. Der
+      DHCP-Server von AdGuard Home steht nicht zur Verfügung.

@@ -1,0 +1,44 @@
+id: bazarr
+name: Bazarr
+tagline: Finds subtitles for your films and series
+description: |
+  Bazarr works alongside Sonarr and Radarr and downloads subtitles in the
+  languages you choose for every film and episode they manage. It searches
+  many subtitle providers, picks the best match for each release, keeps
+  looking for better ones and saves them next to the video files.
+categories: [media, downloads]
+developer: Bazarr contributors
+website: https://www.bazarr.media
+source: https://github.com/morpheus65535/bazarr
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Connect Sonarr and Radarr under Settings with the NAS's address, their
+  ports and API keys. Bazarr sees the library under /data, as they do.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 6767
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: Untertitel für Filme und Serien finden
+    description: |
+      Bazarr arbeitet mit Sonarr und Radarr zusammen und lädt Untertitel in
+      den gewünschten Sprachen für jeden Film und jede Folge, die diese
+      verwalten. Es durchsucht viele Untertitel-Anbieter, wählt für jede
+      Version den passenden, sucht weiter nach besseren und speichert sie
+      neben den Videodateien.
+    notes: |
+      Verbinde Sonarr und Radarr unter Settings mit der Adresse des NAS,
+      ihren Ports und API-Schlüsseln. Bazarr sieht die Bibliothek wie sie
+      unter /data.

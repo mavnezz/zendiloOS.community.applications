@@ -1,0 +1,17 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+      VERSION: docker
+      PLEX_CLAIM: ${PLEX_CLAIM}
+    ports:
+      - ${PORT_WEB}:32400
+    volumes:
+      - ${APP_DATA}/config:/config
+      - ${SHARE_DATA}:/data:ro
+    devices:
+      - /dev/dri:/dev/dri

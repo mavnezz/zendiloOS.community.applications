@@ -1,0 +1,14 @@
+services:
+  kapowarr:
+    image: mrcas/kapowarr:latest
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    ports:
+      - ${PORT_WEB}:5656
+    volumes:
+      - ${APP_DATA}/db:/app/db
+      - ${APP_DATA}/temp_downloads:/app/temp_downloads
+      - ${SHARE_DATA}:/data

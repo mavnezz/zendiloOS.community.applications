@@ -1,0 +1,9 @@
+# Rust
+tools/target/
+
+# The index `just index` builds
+dist/
+
+# Editors
+.vscode/
+.idea/

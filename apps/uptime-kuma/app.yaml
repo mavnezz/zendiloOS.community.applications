@@ -1,0 +1,45 @@
+id: uptime-kuma
+name: Uptime Kuma
+tagline: Monitor websites and services and get notified when they go down
+description: |
+  Uptime Kuma checks at regular intervals whether websites, servers and
+  services respond: web pages over HTTP(S), including a keyword or a JSON
+  value, TCP ports, ping, DNS records, databases, MQTT brokers and more. It
+  records response times and uptime, shows them on a dashboard and sends a
+  notification by e-mail, Telegram, Discord, Slack, Matrix, ntfy or one of
+  many other services when a check fails or recovers. Status pages show the
+  state of chosen monitors to others.
+categories: [monitoring]
+developer: Louis Lam and contributors
+website: https://uptime.kuma.pet
+source: https://github.com/louislam/uptime-kuma
+license: MIT
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  On the first visit, choose the database (the built-in SQLite is enough for
+  most uses) and create the administrator account. The app has no access to
+  Docker, so the Docker container monitor type does not work.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 3001
+translations:
+  de:
+    tagline: Websites und Dienste überwachen und bei Ausfällen benachrichtigt werden
+    description: |
+      Uptime Kuma prüft in festen Abständen, ob Websites, Server und Dienste
+      antworten: Webseiten über HTTP(S), auch auf ein Stichwort oder einen
+      JSON-Wert, TCP-Ports, Ping, DNS-Einträge, Datenbanken, MQTT-Broker und
+      mehr. Es zeichnet Antwortzeiten und Verfügbarkeit auf, zeigt sie in
+      einem Dashboard und benachrichtigt per E-Mail, Telegram, Discord,
+      Slack, Matrix, ntfy oder über einen von vielen weiteren Diensten, wenn
+      eine Prüfung fehlschlägt oder wieder klappt. Statusseiten zeigen
+      anderen den Zustand ausgewählter Monitore.
+    notes: |
+      Wähle beim ersten Aufruf die Datenbank (das eingebaute SQLite reicht
+      für die meisten Zwecke) und lege das Administratorkonto an. Die App hat
+      keinen Zugriff auf Docker, deshalb funktioniert der Monitortyp für
+      Docker-Container nicht.

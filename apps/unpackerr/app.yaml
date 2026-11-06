@@ -1,0 +1,60 @@
+id: unpackerr
+name: Unpackerr
+tagline: Extracts packed downloads so Radarr and Sonarr can import them
+description: |
+  Unpackerr watches the queues of Sonarr, Radarr, Lidarr and Readarr for
+  finished downloads that arrive as archives: RAR, ZIP, 7-Zip, TAR, ISO and
+  more, also archives inside archives. It extracts them in the download
+  folder so the app can import the files, and deletes the extracted copies
+  once the import is done; the archives stay in place for seeding. It can
+  also extract everything that lands in a watch folder. A web interface
+  shows the queue, history and logs and holds the settings.
+categories: [downloads]
+developer: Go Lift
+website: https://unpackerr.zip
+source: https://github.com/Unpackerr/unpackerr
+license: MIT
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Sign in as `admin` with the temporary password that Unpackerr writes to
+  the app's log at its first start, and change it under Settings → Web
+  server. If it gets lost, empty ui_password in config/unpackerr.conf of the
+  app's data and restart the app. Add Sonarr and Radarr under Settings →
+  Starr with the addresses http://host.docker.internal:8989 and
+  http://host.docker.internal:7878 and their API keys. Unpackerr finds the
+  downloads under /data, where qBittorrent saves them.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 5657
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: Gepackte Downloads entpacken, damit Radarr und Sonarr sie importieren
+    description: |
+      Unpackerr beobachtet die Warteschlangen von Sonarr, Radarr, Lidarr und
+      Readarr auf fertige Downloads, die als Archiv kommen: RAR, ZIP, 7-Zip,
+      TAR, ISO und mehr, auch Archive in Archiven. Es entpackt sie im
+      Download-Ordner, damit die App die Dateien importieren kann, und
+      löscht die entpackten Kopien nach dem Import wieder; die Archive
+      bleiben zum Seeden liegen. Außerdem kann es alles entpacken, was in
+      einem überwachten Ordner landet. Eine Weboberfläche zeigt
+      Warteschlange, Verlauf und Protokoll und enthält die Einstellungen.
+    notes: |
+      Melde dich als `admin` mit dem vorläufigen Passwort an, das Unpackerr
+      beim ersten Start ins Protokoll der App schreibt, und ändere es unter
+      Settings → Web server. Geht es verloren, leere ui_password in
+      config/unpackerr.conf der App-Daten und starte die App neu. Füge unter
+      Settings → Starr Sonarr und Radarr mit den Adressen
+      http://host.docker.internal:8989 und http://host.docker.internal:7878
+      und ihren API-Schlüsseln hinzu. Unpackerr findet die Downloads unter
+      /data, wo qBittorrent sie speichert.

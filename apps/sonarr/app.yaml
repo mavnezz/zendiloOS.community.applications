@@ -1,0 +1,50 @@
+id: sonarr
+name: Sonarr
+tagline: Finds, downloads and sorts series automatically
+description: |
+  Sonarr follows the series you want. It finds new episodes on your indexers
+  as soon as they are released, hands them to a download client such as
+  qBittorrent and files them into your library by series and season. It
+  fills in missing episodes, swaps in better releases and keeps a calendar
+  of what airs next.
+categories: [downloads]
+developer: Sonarr team
+website: https://sonarr.tv
+source: https://github.com/Sonarr/Sonarr
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Connect qBittorrent and Prowlarr with the NAS's address and their ports,
+  for example http://192.168.1.10:8080. Keep downloads and series in the
+  same share, such as /data/torrents and /data/media/tv: then Sonarr
+  hard-links finished downloads instead of copying them.
+web:
+  port: web
+ports:
+  - id: web
+    label: Web interface
+    default: 8989
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: Serien automatisch finden, herunterladen und einsortieren
+    description: |
+      Sonarr verfolgt die Serien, die du sehen möchtest. Neue Folgen findet
+      es über deine Indexer, sobald sie erscheinen, übergibt sie an einen
+      Download-Client wie qBittorrent und sortiert sie nach Serie und
+      Staffel in deine Bibliothek. Fehlende Folgen holt es nach, bessere
+      Versionen tauscht es aus, und ein Kalender zeigt, was als Nächstes
+      läuft.
+    notes: |
+      Verbinde qBittorrent und Prowlarr über die Adresse des NAS und ihre
+      Ports, zum Beispiel http://192.168.1.10:8080. Lege Downloads und
+      Serien in dieselbe Freigabe, etwa nach /data/torrents und
+      /data/media/tv: Dann verlinkt Sonarr fertige Downloads, statt sie zu
+      kopieren.

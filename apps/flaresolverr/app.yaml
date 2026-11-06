@@ -1,0 +1,36 @@
+id: flaresolverr
+name: FlareSolverr
+tagline: Gets indexers past Cloudflare's browser check
+description: |
+  FlareSolverr is a proxy that opens pages in a headless browser, waits
+  until the challenge of Cloudflare or DDoS-Guard has passed and hands back
+  the page and its cookies. Prowlarr uses it for indexers whose sites sit
+  behind such a check. It has no interface of its own.
+categories: [downloads]
+developer: FlareSolverr contributors
+website: https://github.com/FlareSolverr/FlareSolverr
+source: https://github.com/FlareSolverr/FlareSolverr
+license: MIT
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  In Prowlarr, add FlareSolverr under Settings → Indexers as a proxy at
+  http://<NAS address>:8191 and give it a tag; indexers with that tag use
+  it.
+ports:
+  - id: api
+    label: Proxy for Prowlarr
+    default: 8191
+translations:
+  de:
+    tagline: Indexer an der Browserprüfung von Cloudflare vorbeibringen
+    description: |
+      FlareSolverr ist ein Proxy, der Seiten in einem unsichtbaren Browser
+      öffnet, wartet, bis die Prüfung von Cloudflare oder DDoS-Guard
+      bestanden ist, und Seite und Cookies zurückgibt. Prowlarr nutzt ihn
+      für Indexer, deren Seiten hinter so einer Prüfung liegen. Eine eigene
+      Oberfläche hat er nicht.
+    notes: |
+      Füge FlareSolverr in Prowlarr unter Settings → Indexers als Proxy mit
+      http://<Adresse des NAS>:8191 hinzu und gib ihm ein Tag; Indexer mit
+      diesem Tag nutzen ihn.

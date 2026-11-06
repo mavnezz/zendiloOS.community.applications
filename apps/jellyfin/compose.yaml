@@ -1,0 +1,15 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    ports:
+      - ${PORT_WEB}:8096
+    volumes:
+      - ${APP_DATA}/config:/config
+      - ${SHARE_DATA}:/data:ro
+    devices:
+      - /dev/dri:/dev/dri

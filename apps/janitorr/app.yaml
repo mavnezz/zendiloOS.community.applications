@@ -1,0 +1,59 @@
+id: janitorr
+name: Janitorr
+tagline: Deletes films and series nobody watches before the disk runs full
+description: |
+  Janitorr cleans up a library managed by Radarr and Sonarr. It deletes
+  films and seasons by age: how long ago they were downloaded or, with
+  Jellystat or Streamystats, last watched. The fuller the disk, the sooner
+  they go; with enough free space nothing is deleted. Tags in Radarr and
+  Sonarr keep media for good or give it its own expiry, and shows can be
+  thinned out to their newest episodes. Janitorr also removes the matching
+  requests in Seerr and the leftovers in Jellyfin or Emby, and can show a
+  "Leaving soon" collection in Jellyfin before anything goes. It has no
+  interface; it is configured through a file.
+categories: [media]
+developer: Schaka
+website: https://github.com/Schaka/janitorr
+source: https://github.com/Schaka/janitorr
+license: GPL-3.0-only
+maintainers: [mavnezz]
+architectures: [amd64, arm64]
+notes: |
+  Janitorr deletes media. Copy the template
+  https://github.com/Schaka/janitorr/blob/main/src/main/resources/application-template.yml
+  as application.yml into the folder config of the app's data, fill in
+  Radarr, Sonarr, Jellyfin and Seerr with addresses such as
+  http://host.docker.internal:7878 and their API keys, and restart the app.
+  Leave dry-run: true until the log in the folder logs shows only what
+  should go. "Leaving soon" needs Jellyfin to see the library under /data,
+  as Janitorr does.
+shares:
+  - id: data
+    label: Media and downloads
+    description: >-
+      One share for downloads and library, the same in every app of the
+      media stack: then files are moved and hard-linked instead of copied.
+    access: read-write
+translations:
+  de:
+    tagline: Filme und Serien löschen, die niemand schaut, bevor die Platte voll ist
+    description: |
+      Janitorr räumt eine Bibliothek auf, die Radarr und Sonarr verwalten.
+      Es löscht Filme und Staffeln nach Alter: wie lange der Download oder,
+      mit Jellystat oder Streamystats, das letzte Anschauen her ist. Je
+      voller die Platte, desto früher; bei genug freiem Platz wird nichts
+      gelöscht. Tags in Radarr und Sonarr schützen Medien dauerhaft oder
+      geben ihnen eine eigene Frist, und Serien lassen sich auf ihre neuesten
+      Folgen ausdünnen. Janitorr entfernt außerdem die passenden Anfragen in
+      Seerr und die Reste in Jellyfin oder Emby und kann vorher in Jellyfin
+      eine Sammlung „Leaving soon“ zeigen. Eine Oberfläche hat es nicht; es
+      wird über eine Datei eingerichtet.
+    notes: |
+      Janitorr löscht Medien. Kopiere die Vorlage
+      https://github.com/Schaka/janitorr/blob/main/src/main/resources/application-template.yml
+      als application.yml in den Ordner config der App-Daten, trage Radarr,
+      Sonarr, Jellyfin und Seerr mit Adressen wie
+      http://host.docker.internal:7878 und ihren API-Schlüsseln ein und
+      starte die App neu. Lass dry-run: true stehen, bis das Log im Ordner
+      logs nur zeigt, was wirklich weg soll. „Leaving soon“ setzt voraus,
+      dass Jellyfin die Bibliothek wie Janitorr unter /data sieht.

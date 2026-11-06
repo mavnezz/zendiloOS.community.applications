@@ -1,0 +1,70 @@
+# Checks the validator and every app on each pull request and push to main.
+# Actions are pinned to commit SHAs; tags can be moved, commits cannot.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-24.04
+    env:
+      # Optional: with a Docker Hub account (a read-only token is enough),
+      # Docker Hub allows more requests than anonymously.
+      DOCKERHUB_LOGIN: ${{ vars.DOCKERHUB_USERNAME != '' && secrets.DOCKERHUB_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      # Installs the toolchain rust-toolchain.toml names.
+      - name: Rust and just
+        run: |
+          rustup toolchain install
+          sudo apt-get install --yes --no-install-recommends just
+
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+        with:
+          workspaces: tools
+
+      - name: Log in to Docker Hub
+        if: env.DOCKERHUB_LOGIN == 'true'
+        env:
+          DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: echo "$DOCKERHUB_TOKEN" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
+
+      - name: Lint
+        run: just lint
+
+      - name: Test
+        run: just test
+
+      - name: Validate all apps
+        run: just validate-offline
+
+      # Only the apps a pull request or push changed, to stay within the
+      # registries' rate limits.
+      - name: Validate changed apps against the registries
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          # No base, or one the history no longer has (after a force push):
+          # check every app.
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            just validate
+            exit
+          fi
+          changed=$(git diff --name-only "$BASE" HEAD -- apps | cut -d/ -f2 | sort -u)
+          existing=$(for id in $changed; do [ -d "apps/$id" ] && echo "$id"; done)
+          if [ -n "$existing" ]; then just validate $existing; else echo "no app changed"; fi
