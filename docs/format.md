@@ -16,18 +16,31 @@ Nothing else belongs in the folder: Docker would read some files on its own
 
 ## 1. How zendiloOS installs an app
 
-1. The administrator picks an app. zendiloOS shows the manifest: the
-   permissions to confirm, the shares to choose, the settings to fill in and
-   the host ports it proposes.
-2. zendiloOS creates the app's data folder on a volume and fills in the
-   [variables](#3-variables).
-3. The agent has Compose interpolate and normalize the file
-   (`docker compose config --format json`), checks the result against the
-   [policy](#4-what-compose-files-may-do) with the real values, and starts
-   exactly that normalized form. What is checked is what runs.
+An app of the catalog is a template for a Docker Compose project of the
+administrator's own; once installed, the project is theirs.
 
-The catalog's CI runs the same checks with stand-in values, so a pull
-request learns about every violation before anyone installs it.
+1. The administrator picks an app and a place for it: a project name (the
+   app's id by default) and a folder in a share (`docker/<id>` by default),
+   which becomes the project's folder.
+2. zendiloOS shows the manifest: the permissions, the shares to choose, the
+   settings to fill in and the host ports it proposes. It fills the
+   [variables](#3-variables) into `compose.yaml` itself, as literal values
+   (quoted where YAML needs it, a `$` doubled for Compose), keeping the
+   file's comments and layout, and shows the result, which may still be
+   changed.
+3. The file then takes the path of any project an administrator writes:
+   Compose reads it, what reaches beyond the containers (devices, extra
+   capabilities, the host network, the Docker socket, …) is named and must
+   be confirmed, the file is written as `compose.yaml` into the project's
+   folder, the folders it binds inside that folder are made as the
+   administrator, and the project is deployed.
+4. From then on it is a project like any other in zendiloOS's Docker app:
+   its file is edited and deployed there, its images updated there. The App
+   Center only knows which app it came from, to open its web interface.
+
+The catalog's CI runs the [policy](#4-what-compose-files-may-do) on every
+pull request, and zendiloOS runs the same checks on every entry of an index
+before it lists the app: an app that fails them is not offered.
 
 ## 2. `app.yaml`
 
@@ -105,15 +118,26 @@ zendiloOS provides these and nothing else; the validator refuses any other
 
 | Variable | Value | May be used in |
 |---|---|---|
-| `APP_DATA` | the app's own data folder on a volume, e.g. `/volume1/@apps/jellyfin` | source of a bind mount |
-| `SHARE_<ID>` | the path of the share the administrator picked for `shares[].id` (upper-case, `-` → `_`) | source of a bind mount |
+| `APP_DATA` | the project's folder, written as `.`: `${APP_DATA}/config` becomes `./config` | source of a bind mount |
+| `SHARE_<ID>` | the path of the share, or the folder in it, the administrator picked for `shares[].id` (upper-case, `-` → `_`), e.g. `/volume1/media/Films` | source of a bind mount |
 | `PORT_<ID>` | the host port for `ports[].id` | `ports` (host and container side), `expose`, `environment`, `command`, `entrypoint`, `healthcheck` |
-| `PUID`, `PGID` | the account the app runs as; owns `APP_DATA` and gets the declared access to the shares | `environment`, `user` |
+| `PUID`, `PGID` | the installing administrator's account and primary group; the folders below `APP_DATA` are theirs | `environment`, `user` |
 | `TZ` | the NAS's time zone, e.g. `Europe/Berlin` | `environment` |
 | `<SETTING>` | the value of a setting | `environment`, `command`, `entrypoint`, `healthcheck` |
 
 The column on the right is enforced: a value the administrator types in must
 not end up in an `image` or a mount.
+
+Mount folders below `APP_DATA` (`${APP_DATA}/config`), never `APP_DATA`
+itself: that is the project's folder, with `compose.yaml` in it. Publish the
+web interface's port in the short form `${PORT_<ID>}:<container port>`:
+zendiloOS finds the app's address again by the container port it publishes.
+Write each device as an item of its own in a block list (`- /dev/dri:/dev/dri`):
+zendiloOS comments out the items of devices the machine lacks, and only
+such items.
+
+The values stand in the file as they are, generated secrets too: whoever may
+read the share the project's folder is in may read them.
 
 ## 4. What compose files may do
 
@@ -270,11 +294,11 @@ settings:
 ## 6. Updates
 
 Images follow moving tags, so a new version of an app needs no change to the
-catalog: zendiloOS looks for new images under the tags an installed app
-uses, as `docker compose pull` would, and offers them as an update. The
-catalog itself changes through pull requests only; zendiloOS also offers an
-update when an app's `digest` in the index changes (see below). Either way
-it keeps `APP_DATA`, the chosen shares, ports and settings.
+catalog: zendiloOS's Docker app looks for new images under the tags a
+project uses and pulls them when asked or on its schedule. A changed entry
+in the catalog reaches only new installations; an installed app's file
+belongs to the administrator, and zendiloOS does not change it. The catalog
+itself changes through pull requests only.
 
 Renovate opens a pull request when an image on a major tag (a database) gets
 a new major version; whoever reviews it checks the release notes for
@@ -308,26 +332,24 @@ index.
 
 ## 8. What zendiloOS must do on the NAS
 
-The checks live in the `zendiloos-catalog` crate, so the agent runs the same
-code. Beyond them, the agent:
+The checks live in the `zendiloos-catalog` crate. zendiloOS:
 
-- runs `check_source` before Compose sees the file, because Compose would
-  read what `env_file`, `extends` or `include` point to while normalizing;
-- normalizes the compose file twice: with the stand-in values, for
-  `check_variables` (where each variable ends up), and with the real values,
-  for `check_normalized`; it starts the second, normalized form, never the
-  file as written;
-- runs `docker compose` with a cleared environment, `--env-file /dev/null`
-  and an empty project directory, so nothing else is read;
-- creates every bind-mount source below `APP_DATA` before starting, owned by
-  `PUID:PGID`, and opens each source without following links
-  (`openat2` with `RESOLVE_NO_SYMLINKS`) before every start;
-- grants `PUID:PGID` the declared access to the chosen shares;
-- leaves out devices the machine lacks, and checks that fixed ports are free;
-- looks for new images under the tags of installed apps and offers updates;
+- checks every entry of an index with them before it lists the app, and
+  leaves out an entry that fails, never repairing it;
+- fills the variables into the file itself, refusing values with line
+  breaks or longer than 4096 bytes, and parses the result again: it must be
+  the same document with the values in place;
+- treats the result as an administrator's own project from there on (its
+  own checks and confirmation, what runs is what was confirmed, binds into
+  a volume pinned so a link swapped in later is not followed);
+- makes the folders below `APP_DATA` as the administrator before deploying,
+  opening each name without following links;
+- comments out devices the machine lacks;
 - generates `generate: true` settings once, as 32 letters and digits or as
-  `length` and `alphabet` say, and keeps them across updates;
-- gives the administrator a way to edit files in `APP_DATA`, for apps that
-  are configured through a file;
+  `length` and `alphabet` say;
 - serves icons with `Content-Type: image/png` and does not trust the index
   beyond what the checks allow.
+
+Apps zendiloOS installed the earlier way (with a dataset and an account of
+their own, run from a normalized file the agent kept) keep running and can
+be removed; new installations take the path above.

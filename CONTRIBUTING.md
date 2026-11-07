@@ -53,7 +53,8 @@ They must include everything `architectures` names in `app.yaml`.
 
 Apps follow moving tags, so new versions reach the NAS without a pull
 request. When an app changes in a way the compose file must follow (mount
-points, variables, ports), update the app. Renovate opens a pull request
+points, variables, ports), update the app; installations made before keep
+their file, which belongs to their administrator. Renovate opens a pull request
 when a database on a major tag gets a new major version; whoever reviews it
 checks the release notes for migrations.
 
