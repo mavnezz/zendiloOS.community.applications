@@ -38,7 +38,8 @@ catalog.
 3. Add `icon.png`: square, 256×256 (up to 1024), at most 256 KiB.
 4. Check it: `just validate <id>`. Without Rust or Docker at hand, open the
    pull request anyway; CI runs the same checks and comments on each
-   problem.
+   problem (for a contributor from outside, once a maintainer has started
+   the run).
 5. Open a pull request. Say how you tried the app.
 
 See which architectures an image has with:
@@ -68,7 +69,12 @@ A maintainer checks what CI cannot:
 
 - the image comes from the project or a well-known packager;
 - shares are read-only where the app does not need to write;
-- permissions (`devices`, `capabilities`, `host_network`) are really needed,
-  and `notes` say what the administrator must know;
+- permissions (`devices`, `capabilities`, `host_network`, `docker_socket`)
+  are really needed, and `notes` say what the administrator must know;
 - the app starts with the given values: data folders owned by `PUID:PGID`,
   the web interface on the declared port.
+
+A pull request is merged once CI and CodeQL pass, every conversation is
+resolved and the maintainer approved it; it lands on `main` as one squashed
+commit with the pull request's title, so make the title say what changes
+(`Add Paperless-ngx`, `Jellyfin: mount the transcode folder`).
